@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#0f172a"/>
+  <rect width="398" height="238" x="1" y="1" rx="15" stroke="#334155" stroke-width="1.5"/>
+  <rect x="40" y="45" width="320" height="150" rx="12" fill="#e11d48"/>
+  <text x="200" y="125" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="44" fill="#ffffff" letter-spacing="1">आज तक</text>
+  <rect x="100" y="142" width="200" height="32" rx="6" fill="#ffffff"/>
+  <text x="200" y="165" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="20" fill="#e11d48" letter-spacing="3">AAJ TAK</text>
+</svg>
+

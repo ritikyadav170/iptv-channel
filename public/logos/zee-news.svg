@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#0f172a"/>
+  <rect width="398" height="238" x="1" y="1" rx="15" stroke="#334155" stroke-width="1.5"/>
+  <rect x="40" y="45" width="320" height="150" rx="12" fill="#0284c7"/>
+  <circle cx="200" cy="100" r="38" fill="#ffffff"/>
+  <text x="200" y="114" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="34" fill="#0284c7">ZEE</text>
+  <rect x="110" y="146" width="180" height="32" rx="6" fill="#f59e0b"/>
+  <text x="200" y="169" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="#0f172a" letter-spacing="2">NEWS</text>
+</svg>
+

@@ -7,21 +7,32 @@ import { Channel, Category } from '@/types/channel';
 export { PREFERRED_LANGUAGES } from './constants';
 
 export function getChannels(): Channel[] {
+  let list = channelsJson as Channel[];
   try {
     const channelsPath = path.join(process.cwd(), 'data', 'channels.json');
     if (fs.existsSync(channelsPath)) {
       const raw = fs.readFileSync(channelsPath, 'utf8');
-      return JSON.parse(raw) as Channel[];
+      list = JSON.parse(raw) as Channel[];
     }
   } catch (err) {
     console.warn('Failed to read data/channels.json via fs, using static json:', err);
   }
-  return channelsJson as Channel[];
+
+  // Assign 1-based sequential channel number (CH 01, CH 02...)
+  return list.map((c, index) => ({
+    ...c,
+    chNumber: c.chNumber || index + 1,
+  }));
 }
 
 export function getChannelById(id: string): Channel | undefined {
   const channels = getChannels();
   return channels.find((c) => c.id.toLowerCase() === id.toLowerCase());
+}
+
+export function getChannelByNumber(chNum: number): Channel | undefined {
+  const channels = getChannels();
+  return channels.find((c) => c.chNumber === chNum);
 }
 
 export function getCategories(): Category[] {

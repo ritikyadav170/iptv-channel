@@ -18,6 +18,7 @@ export interface Channel {
   logo: string;
   hlsUrl: string;
   headers?: Record<string, string>;
+  chNumber?: number;
 }
 
 export interface Category {
@@ -36,4 +37,3 @@ export interface EPGProgram {
   start: string;
   end: string;
 }
-

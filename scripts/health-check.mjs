@@ -10,7 +10,7 @@ async function checkChannel(channel) {
   if (!channel.hlsUrl || !channel.hlsUrl.trim()) {
     return {
       status: 'COMING_SOON',
-      message: 'No HLS URL configured',
+      message: 'No stream URL configured',
       latencyMs: null,
     };
   }
@@ -18,6 +18,9 @@ async function checkChannel(channel) {
   const startTime = Date.now();
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+  const isYouTube =
+    channel.hlsUrl.includes('youtube.com') || channel.hlsUrl.includes('youtu.be');
 
   try {
     const headers = {
@@ -44,12 +47,31 @@ async function checkChannel(channel) {
       };
     }
 
+    if (isYouTube) {
+      const html = await res.text();
+      const idMatch = html.match(/"videoId":"([^"]+)"/);
+      if (idMatch || channel.hlsUrl.includes('watch?v=')) {
+        const vid = idMatch ? idMatch[1] : 'Direct ID';
+        return {
+          status: 'ACTIVE',
+          message: `Active YouTube Live Stream (ID: ${vid})`,
+          latencyMs,
+        };
+      }
+      return {
+        status: 'ACTIVE',
+        message: 'Active YouTube Broadcast Page',
+        latencyMs,
+      };
+    }
+
+    // Standard HLS check
     const text = await res.text();
     if (text.includes('#EXTM3U')) {
       const isMaster = text.includes('#EXT-X-STREAM-INF');
       return {
         status: 'ACTIVE',
-        message: isMaster ? 'Active Master Playlist' : 'Active Media Playlist',
+        message: isMaster ? 'Active HLS Master Playlist' : 'Active HLS Media Playlist',
         latencyMs,
       };
     } else {
@@ -121,4 +143,3 @@ async function runHealthCheck() {
 }
 
 runHealthCheck();
-

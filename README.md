@@ -306,3 +306,4 @@ To connect an XMLTV EPG provider:
 
 ## 📄 License
 MIT License. Built for seamless live broadcast streaming.
+

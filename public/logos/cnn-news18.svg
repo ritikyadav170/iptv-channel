@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#0f172a"/>
+  <rect width="398" height="238" x="1" y="1" rx="15" stroke="#334155" stroke-width="1.5"/>
+  <rect x="40" y="45" width="320" height="150" rx="12" fill="#991b1b"/>
+  <rect x="60" y="65" width="90" height="50" rx="6" fill="#cc0000"/>
+  <text x="105" y="102" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="28" fill="#ffffff">CNN</text>
+  <text x="210" y="103" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="30" fill="#ffffff">NEWS</text>
+  <rect x="275" y="65" width="60" height="50" rx="6" fill="#ffffff"/>
+  <text x="305" y="102" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="32" fill="#991b1b">18</text>
+  <rect x="70" y="138" width="260" height="34" rx="4" fill="#0f172a"/>
+  <text x="200" y="161" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="800" font-size="16" fill="#ffffff" letter-spacing="3">STAND FOR THE TRUTH</text>
+</svg>
+
