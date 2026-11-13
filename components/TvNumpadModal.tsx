@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, Delete, Check, Hash } from 'lucide-react';
+import Image from 'next/image';
+import { X, Delete, Check, Hash, Tv } from 'lucide-react';
 import { Channel } from '@/types/channel';
 
 interface TvNumpadModalProps {
@@ -24,6 +25,43 @@ export default function TvNumpadModal({
       setDigits('');
     }
   }, [isOpen]);
+
+  const handleDigit = (digit: string) => {
+    if (digits.length >= 2) {
+      setDigits(digit); // start new number on 3rd digit
+    } else {
+      const next = digits + digit;
+      setDigits(next);
+
+      // Auto-jump if 2 digits match a valid channel
+      if (next.length === 2) {
+        const num = parseInt(next, 10);
+        const match = channels.find((c) => c.chNumber === num);
+        if (match) {
+          setTimeout(() => {
+            onSelectChannel(match);
+            onClose();
+          }, 350);
+        }
+      }
+    }
+  };
+
+  const handleBackspace = () => {
+    setDigits((prev) => prev.slice(0, -1));
+  };
+
+  const currentNum = parseInt(digits, 10);
+  const matchedChannel = !isNaN(currentNum)
+    ? channels.find((c) => c.chNumber === currentNum)
+    : null;
+
+  const handleEnter = () => {
+    if (matchedChannel) {
+      onSelectChannel(matchedChannel);
+      onClose();
+    }
+  };
 
   // Keyboard number listener when modal is open
   useEffect(() => {
@@ -50,112 +88,96 @@ export default function TvNumpadModal({
 
   if (!isOpen) return null;
 
-  const handleDigit = (digit: string) => {
-    if (digits.length >= 2) {
-      setDigits(digit); // reset on 3rd digit
-    } else {
-      setDigits((prev) => prev + digit);
-    }
-  };
-
-  const handleBackspace = () => {
-    setDigits((prev) => prev.slice(0, -1));
-  };
-
-  const currentNum = parseInt(digits, 10);
-  const matchedChannel = !isNaN(currentNum)
-    ? channels.find((c) => c.chNumber === currentNum)
-    : null;
-
-  const handleEnter = () => {
-    if (matchedChannel) {
-      onSelectChannel(matchedChannel);
-      onClose();
-    }
-  };
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-fade-in">
-      <div className="relative w-full max-w-xs rounded-3xl bg-surface border-2 border-surface-border p-5 shadow-2xl flex flex-col items-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xl p-4 animate-fade-in select-none">
+      <div className="relative w-full max-w-xs rounded-3xl bg-slate-950/95 border border-white/10 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.9)] flex flex-col items-center ring-1 ring-white/10">
         {/* Header */}
-        <div className="w-full flex items-center justify-between pb-3 border-b border-surface-border">
+        <div className="w-full flex items-center justify-between pb-3 border-b border-white/[0.08]">
           <div className="flex items-center gap-2">
-            <Hash className="h-5 w-5 text-yellow-400" />
-            <span className="text-sm font-bold tracking-wider uppercase text-white font-mono">
-              Direct Channel Jump
+            <Tv className="h-4 w-4 text-amber-400" />
+            <span className="text-xs font-black tracking-wider uppercase text-white font-mono">
+              Channel Remote Jump
             </span>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-surface-muted"
+            className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-white/[0.1] transition-colors"
             title="Close"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Display Window */}
-        <div className="w-full my-4 rounded-2xl bg-black/80 border border-white/10 p-3.5 flex flex-col items-center justify-center min-h-[76px]">
-          <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest font-mono">
-            Type Channel Number
+        <div className="w-full my-4 rounded-2xl bg-black/90 border border-white/10 p-3 flex flex-col items-center justify-center min-h-[82px] shadow-inner">
+          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono">
+            TUNE CHANNEL
           </div>
-          <div className="text-3xl font-black font-mono text-yellow-400 tracking-wider">
-            CH {digits ? digits.padStart(2, '0') : '__'}
+          <div className="flex items-center gap-1 my-1">
+            <span className="text-2xl font-black text-amber-400 font-mono">
+              CH {digits ? digits.padStart(2, '0') : '--'}
+            </span>
           </div>
           {matchedChannel ? (
-            <div className="text-xs font-semibold text-emerald-400 truncate max-w-full mt-1">
-              {matchedChannel.name} ({matchedChannel.language})
+            <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold truncate max-w-[200px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <span className="truncate">{matchedChannel.name}</span>
             </div>
           ) : digits ? (
-            <div className="text-xs text-red-400 mt-1">Channel not found</div>
+            <span className="text-[11px] text-slate-400">No channel #{digits}</span>
           ) : (
-            <div className="text-[11px] text-slate-500 mt-1">e.g. 01 for NDTV, 02 for ABP</div>
+            <span className="text-[11px] text-slate-400">Type 01 to 47</span>
           )}
         </div>
 
-        {/* Number Pad Grid (3 x 4) */}
+        {/* Numpad Keypad (0-9) */}
         <div className="grid grid-cols-3 gap-2.5 w-full">
-          {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((d) => (
+          {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
             <button
-              key={d}
-              onClick={() => handleDigit(d)}
-              className="h-14 rounded-2xl bg-surface-muted hover:bg-surface-border active:scale-95 text-xl font-bold font-mono text-white transition-all shadow-md border border-surface-border flex items-center justify-center min-w-[48px]"
+              key={digit}
+              onClick={() => handleDigit(digit)}
+              className="h-12 rounded-2xl bg-white/[0.04] hover:bg-white/[0.1] active:scale-95 border border-white/[0.06] hover:border-amber-400/40 text-lg font-black text-white font-mono shadow-md transition-all flex items-center justify-center min-h-[44px]"
             >
-              {d}
+              {digit}
             </button>
           ))}
 
-          {/* Bottom row: Clear, 0, Enter */}
+          {/* Backspace */}
           <button
             onClick={handleBackspace}
-            className="h-14 rounded-2xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 transition-all border border-surface-border flex items-center justify-center min-w-[48px]"
+            className="h-12 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] active:scale-95 border border-white/[0.06] text-slate-400 hover:text-white transition-all flex items-center justify-center min-h-[44px]"
             title="Backspace"
           >
             <Delete className="h-5 w-5" />
           </button>
 
+          {/* 0 */}
           <button
             onClick={() => handleDigit('0')}
-            className="h-14 rounded-2xl bg-surface-muted hover:bg-surface-border active:scale-95 text-xl font-bold font-mono text-white transition-all shadow-md border border-surface-border flex items-center justify-center min-w-[48px]"
+            className="h-12 rounded-2xl bg-white/[0.04] hover:bg-white/[0.1] active:scale-95 border border-white/[0.06] hover:border-amber-400/40 text-lg font-black text-white font-mono shadow-md transition-all flex items-center justify-center min-h-[44px]"
           >
             0
           </button>
 
+          {/* Enter / Tune */}
           <button
-            disabled={!matchedChannel}
             onClick={handleEnter}
-            className={`h-14 rounded-2xl active:scale-95 font-bold transition-all flex items-center justify-center min-w-[48px] ${
+            disabled={!matchedChannel}
+            className={`h-12 rounded-2xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center min-h-[44px] ${
               matchedChannel
-                ? 'bg-yellow-400 text-black hover:bg-yellow-300 shadow-lg shadow-yellow-400/30 font-black'
-                : 'bg-surface-muted/50 text-slate-600 cursor-not-allowed border border-surface-border/50'
+                ? 'bg-amber-400 text-black hover:bg-amber-300 shadow-lg shadow-amber-400/30 active:scale-95'
+                : 'bg-white/[0.02] border border-white/[0.04] text-slate-400 cursor-not-allowed'
             }`}
-            title="Tune Channel"
           >
-            <Check className="h-6 w-6 stroke-[3]" />
+            <Check className="h-5 w-5 stroke-[3]" />
           </button>
         </div>
+
+        {/* Footer Hint */}
+        <p className="mt-3 text-[10px] text-slate-400 text-center font-mono">
+          Press 0-9 on keyboard or tap above to tune
+        </p>
       </div>
     </div>
   );
 }
-

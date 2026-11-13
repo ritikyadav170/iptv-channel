@@ -7,7 +7,6 @@ import {
   RotateCcw,
   Volume2,
   VolumeX,
-  Volume1,
   Tv,
   Hash,
   Plus,
@@ -50,21 +49,20 @@ export default function TvRemoteBar({
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 bg-gradient-to-t from-black via-black/95 to-transparent select-none pointer-events-none">
-      <div className="max-w-5xl mx-auto pointer-events-auto">
-        {/* Main Remote Bar Card */}
-        <div className="rounded-3xl bg-surface/95 border-2 border-surface-border shadow-2xl backdrop-blur-2xl p-2.5 sm:p-3.5 flex items-center justify-between gap-2 sm:gap-4">
-          {/* Left Block: Channel Controls (CH UP / CH DOWN + Display) */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* CH UP & DOWN cluster */}
-            <div className="flex items-center rounded-2xl bg-surface-muted border border-surface-border p-1 shadow-inner">
+      <div className="max-w-4xl mx-auto pointer-events-auto">
+        {/* Floating Remote Glass Pill */}
+        <div className="rounded-3xl bg-slate-950/90 border border-white/10 shadow-[0_12px_45px_rgba(0,0,0,0.85)] backdrop-blur-2xl p-2.5 sm:p-3 flex items-center justify-between gap-2 sm:gap-4 ring-1 ring-white/5">
+          {/* Channel Controls (CH - / CH +) */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center rounded-2xl bg-white/[0.04] border border-white/[0.08] p-1 shadow-inner">
               <button
                 onClick={onChannelDown}
-                className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-white transition-all shadow-md min-w-[44px]"
-                title="Channel Down (Arrow Down)"
+                className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-slate-900/90 hover:bg-slate-800 active:scale-95 text-white transition-all shadow-md min-w-[44px]"
+                title="Channel Down (Arrow Down or PageDown)"
               >
                 <div className="flex flex-col items-center">
-                  <ChevronDown className="h-6 w-6 stroke-[3]" />
-                  <span className="text-[9px] font-black tracking-tighter uppercase -mt-1 text-slate-400">
+                  <ChevronDown className="h-5 w-5 stroke-[2.5]" />
+                  <span className="text-[8px] font-black tracking-tighter uppercase text-slate-400">
                     CH -
                   </span>
                 </div>
@@ -72,150 +70,122 @@ export default function TvRemoteBar({
 
               <button
                 onClick={onChannelUp}
-                className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-red-600 hover:bg-red-500 active:scale-95 text-white transition-all shadow-lg shadow-red-600/30 min-w-[44px] ml-1"
-                title="Channel Up (Arrow Up)"
+                className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 active:scale-95 text-white transition-all shadow-lg shadow-red-600/30 min-w-[44px] ml-1"
+                title="Channel Up (Arrow Up or PageUp)"
               >
                 <div className="flex flex-col items-center">
-                  <ChevronUp className="h-6 w-6 stroke-[3]" />
-                  <span className="text-[9px] font-black tracking-tighter uppercase -mt-1 text-white">
+                  <ChevronUp className="h-5 w-5 stroke-[2.5]" />
+                  <span className="text-[8px] font-black tracking-tighter uppercase text-white">
                     CH +
                   </span>
                 </div>
               </button>
             </div>
 
-            {/* Current Channel Display */}
+            {/* Current Channel Display (Click to open Guide) */}
             <div
               onClick={onOpenGuide}
-              className="hidden md:flex items-center gap-3 px-4 py-2 rounded-2xl bg-black/60 border border-white/10 cursor-pointer hover:border-yellow-400/50 transition-colors group"
+              className="hidden sm:flex items-center gap-3 px-3.5 py-1.5 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.06] hover:border-amber-400/40 cursor-pointer transition-all group"
               title="Click to open TV Guide"
             >
-              <div className="rounded-xl bg-yellow-400 px-2.5 py-1 text-black font-mono font-black text-lg leading-tight shrink-0 shadow-md">
+              <div className="rounded-xl bg-amber-400 px-2 py-0.5 text-black font-mono font-black text-sm leading-tight shrink-0 shadow-md">
                 CH {chNum}
               </div>
-              <div className="min-w-0 max-w-[200px]">
-                <p className="text-sm font-black text-white truncate group-hover:text-yellow-400 transition-colors leading-tight">
+              <div className="min-w-0 max-w-[170px]">
+                <p className="text-xs font-black text-white truncate group-hover:text-amber-400 transition-colors leading-tight">
                   {currentChannel.name}
                 </p>
-                <p className="text-[11px] text-slate-400 truncate">
-                  {currentChannel.language} • {currentChannel.category}
+                <p className="text-[10px] text-slate-400 truncate flex items-center gap-1">
+                  <span>{currentChannel.category}</span>
+                  <span>•</span>
+                  <span>{currentChannel.language}</span>
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Center Mobile Display (compact) */}
-          <div
-            onClick={onOpenGuide}
-            className="flex md:hidden items-center gap-2 px-3 py-1.5 rounded-xl bg-black/60 border border-white/10 cursor-pointer text-left min-w-0 flex-1"
-          >
-            <span className="rounded-lg bg-yellow-400 px-2 py-0.5 text-black font-mono font-black text-xs shrink-0">
-              {chNum}
-            </span>
-            <div className="min-w-0">
-              <p className="text-xs font-bold text-white truncate">
-                {currentChannel.name}
-              </p>
-            </div>
-          </div>
+          {/* Center / Right Action Buttons */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Guide Button */}
+            <button
+              onClick={onOpenGuide}
+              className="flex items-center gap-1.5 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] hover:border-amber-400/40 text-white font-bold text-xs transition-all active:scale-95 min-h-[44px]"
+              title="Open Cable TV Guide (Press 'G')"
+            >
+              <Tv className="h-4 w-4 text-amber-400" />
+              <span className="hidden md:inline">GUIDE</span>
+            </button>
 
-          {/* Right Block: Remote Tools (Recall, Numpad, Volume, Guide) */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5">
-            {/* Last Channel / Recall Button */}
+            {/* Jump Numpad (123) Button */}
+            <button
+              onClick={onOpenNumpad}
+              className="flex items-center gap-1.5 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] hover:border-white/[0.2] text-white font-bold text-xs transition-all active:scale-95 min-h-[44px]"
+              title="Direct Channel Number Jump (Press 0-9)"
+            >
+              <Hash className="h-4 w-4 text-cyan-400" />
+              <span className="hidden md:inline">123</span>
+            </button>
+
+            {/* Recall (Last Channel) Button */}
             <button
               onClick={onRecall}
               disabled={!hasLastChannel}
-              className={`flex h-12 px-3 sm:px-4 sm:h-14 items-center justify-center gap-1.5 rounded-2xl border text-xs font-bold transition-all min-w-[44px] ${
+              className={`flex items-center gap-1.5 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl border text-xs font-bold transition-all active:scale-95 min-h-[44px] ${
                 hasLastChannel
-                  ? 'bg-surface-muted hover:bg-surface-border text-yellow-400 border-surface-border active:scale-95 shadow-md'
-                  : 'bg-surface/50 text-slate-600 border-transparent cursor-not-allowed opacity-40'
+                  ? 'bg-white/[0.05] hover:bg-white/[0.1] border-white/[0.08] text-white cursor-pointer'
+                  : 'bg-white/[0.01] border-white/[0.04] text-slate-400 opacity-40 cursor-not-allowed'
               }`}
               title={
                 hasLastChannel
-                  ? `Return to previous channel: ${lastChannelName}`
-                  : 'No previous channel watched'
+                  ? `Return to previous channel: ${lastChannelName || ''}`
+                  : 'No previous channel watched yet'
               }
             >
-              <RotateCcw className="h-4 w-4 stroke-[2.5]" />
-              <span className="hidden sm:inline font-mono">RECALL</span>
+              <RotateCcw className="h-4 w-4 text-purple-400" />
+              <span className="hidden lg:inline">LAST</span>
             </button>
 
-            {/* Direct Number Pad Jump Button */}
-            <button
-              onClick={onOpenNumpad}
-              className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-surface-muted hover:bg-surface-border active:scale-95 text-slate-200 border border-surface-border shadow-md transition-all min-w-[44px]"
-              title="Type Channel Number (1-9)"
-            >
-              <div className="flex flex-col items-center">
-                <Hash className="h-5 w-5 text-yellow-400" />
-                <span className="text-[9px] font-bold font-mono text-slate-400 -mt-0.5">
-                  123
-                </span>
-              </div>
-            </button>
-
-            {/* Volume Control Cluster */}
-            <div className="hidden sm:flex items-center rounded-2xl bg-surface-muted border border-surface-border p-1">
-              <button
-                onClick={onVolumeDown}
-                className="flex h-12 w-10 sm:h-12 sm:w-10 items-center justify-center rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
-                title="Volume Down"
-              >
-                <Minus className="h-4 w-4" />
-              </button>
-
+            {/* Volume & Mute Cluster */}
+            <div className="flex items-center rounded-2xl bg-white/[0.04] border border-white/[0.08] p-1">
               <button
                 onClick={onToggleMute}
-                className={`flex h-12 px-2.5 items-center justify-center gap-1 rounded-xl transition-colors ${
-                  isMuted ? 'text-red-400 bg-red-500/20' : 'text-slate-200 hover:bg-slate-800'
+                className={`flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl transition-all min-w-[36px] ${
+                  isMuted
+                    ? 'bg-red-600 text-white shadow-md shadow-red-600/30 animate-pulse'
+                    : 'bg-slate-900/90 text-slate-200 hover:bg-slate-800'
                 }`}
-                title={isMuted ? 'Unmute (M)' : 'Mute (M)'}
+                title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
               >
                 {isMuted ? (
                   <VolumeX className="h-4 w-4" />
                 ) : (
-                  <Volume2 className="h-4 w-4" />
+                  <Volume2 className="h-4 w-4 text-emerald-400" />
                 )}
-                <span className="text-[11px] font-mono font-bold">
-                  {isMuted ? '0%' : `${Math.round(volume * 100)}%`}
+              </button>
+
+              <div className="hidden sm:flex items-center ml-1">
+                <button
+                  onClick={onVolumeDown}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg hover:bg-white/[0.08] text-slate-300 transition-colors"
+                  title="Volume Down"
+                >
+                  <Minus className="h-3.5 w-3.5" />
+                </button>
+                <span className="text-[10px] font-mono font-bold text-slate-400 px-1 w-6 text-center">
+                  {isMuted ? '0' : Math.round(volume * 100)}
                 </span>
-              </button>
-
-              <button
-                onClick={onVolumeUp}
-                className="flex h-12 w-10 sm:h-12 sm:w-10 items-center justify-center rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
-                title="Volume Up"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
+                <button
+                  onClick={onVolumeUp}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg hover:bg-white/[0.08] text-slate-300 transition-colors"
+                  title="Volume Up"
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                </button>
+              </div>
             </div>
-
-            {/* Mobile Mute button */}
-            <button
-              onClick={onToggleMute}
-              className={`sm:hidden flex h-12 w-12 items-center justify-center rounded-2xl border min-w-[44px] ${
-                isMuted
-                  ? 'bg-red-500/20 border-red-500 text-red-400'
-                  : 'bg-surface-muted border-surface-border text-slate-300'
-              }`}
-              title="Mute"
-            >
-              {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-            </button>
-
-            {/* TV Guide Button (Large Accent) */}
-            <button
-              onClick={onOpenGuide}
-              className="flex h-12 px-3.5 sm:h-14 sm:px-5 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black active:scale-95 shadow-lg shadow-yellow-400/25 transition-all font-black text-xs sm:text-sm tracking-wide min-w-[44px]"
-              title="Open TV Guide (G)"
-            >
-              <Tv className="h-5 w-5 stroke-[2.5]" />
-              <span className="hidden sm:inline">GUIDE</span>
-            </button>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

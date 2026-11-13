@@ -1,8 +1,6 @@
-# StreamPulse Live TV 📺
+# Dekho TV 📺
 
-A modern, high-performance Live TV streaming web platform built with **Next.js 14**, **Tailwind CSS**, and **hls.js**, featuring an automated **Server-Side HLS Stream Proxy** to defeat CORS and HTTPS mixed-content restrictions.
-
-Currently featuring a live **News** section across 8 regional Indian languages, engineered with an extensible modular structure ready for Sports, Movies, Kids, Entertainment, and Music.
+A modern, high-performance Live Cable TV streaming web platform built with **Next.js 14**, **Tailwind CSS**, and **hls.js**, featuring an automated **Server-Side HLS Stream Proxy** to defeat CORS and HTTPS mixed-content restrictions. Zero learning curve cable TV remote experience.
 
 ---
 

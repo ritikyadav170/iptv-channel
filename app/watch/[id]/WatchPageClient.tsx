@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import {
   Radio,
@@ -9,8 +9,8 @@ import {
   Check,
   ChevronRight,
   Search,
-  ShieldCheck,
   VolumeX,
+  Volume2,
 } from 'lucide-react';
 import { Channel } from '@/types/channel';
 import VideoPlayer from '@/components/VideoPlayer';
@@ -18,6 +18,7 @@ import TvRemoteBar from '@/components/TvRemoteBar';
 import TvChannelBanner from '@/components/TvChannelBanner';
 import TvNumpadModal from '@/components/TvNumpadModal';
 import TvGuideOverlay from '@/components/TvGuideOverlay';
+import QuickChannelStrip from '@/components/QuickChannelStrip';
 
 interface WatchPageClientProps {
   initialChannel: Channel;
@@ -76,17 +77,28 @@ export default function WatchPageClient({
     [currentChannel, triggerBanner]
   );
 
-  const handleChannelUp = useCallback(() => {
-    const currentIndex = allChannels.findIndex((c) => c.id === currentChannel.id);
-    const nextIndex = (currentIndex + 1) % allChannels.length;
-    tuneChannel(allChannels[nextIndex]);
-  }, [allChannels, currentChannel.id, tuneChannel]);
-
-  const handleChannelDown = useCallback(() => {
+  // Compute Prev and Next channel
+  const { prevChannel, nextChannel } = useMemo(() => {
     const currentIndex = allChannels.findIndex((c) => c.id === currentChannel.id);
     const prevIndex = (currentIndex - 1 + allChannels.length) % allChannels.length;
-    tuneChannel(allChannels[prevIndex]);
-  }, [allChannels, currentChannel.id, tuneChannel]);
+    const nextIndex = (currentIndex + 1) % allChannels.length;
+    return {
+      prevChannel: allChannels[prevIndex],
+      nextChannel: allChannels[nextIndex],
+    };
+  }, [allChannels, currentChannel.id]);
+
+  const handleChannelUp = useCallback(() => {
+    if (nextChannel) {
+      tuneChannel(nextChannel);
+    }
+  }, [nextChannel, tuneChannel]);
+
+  const handleChannelDown = useCallback(() => {
+    if (prevChannel) {
+      tuneChannel(prevChannel);
+    }
+  }, [prevChannel, tuneChannel]);
 
   const handleRecall = useCallback(() => {
     if (lastChannel) {
@@ -169,11 +181,11 @@ export default function WatchPageClient({
   );
 
   return (
-    <div className="pb-28 space-y-6">
+    <div className="pb-32 space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main TV Player Column */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-black">
+        <div className="lg:col-span-2 space-y-3">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-black border border-white/10 ring-1 ring-white/5">
             <TvChannelBanner channel={currentChannel} visible={showBanner} />
 
             <VideoPlayer
@@ -188,16 +200,28 @@ export default function WatchPageClient({
             />
           </div>
 
+          {/* Quick Channel Flip Strip */}
+          <QuickChannelStrip
+            currentChannel={currentChannel}
+            prevChannel={prevChannel}
+            nextChannel={nextChannel}
+            onPrev={handleChannelDown}
+            onNext={handleChannelUp}
+            onOpenGuide={() => setIsGuideOpen(true)}
+            isMuted={isMuted}
+            onToggleMute={handleToggleMute}
+          />
+
           {/* Channel Details Header */}
-          <div className="rounded-3xl bg-surface border border-surface-border p-4 sm:p-6 space-y-4">
+          <div className="rounded-3xl bg-slate-900/60 border border-white/[0.08] p-4 sm:p-5 backdrop-blur-xl shadow-xl space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="flex flex-col items-center justify-center rounded-2xl bg-yellow-400 px-3 py-1.5 text-black font-mono font-black text-xl leading-none shrink-0 shadow-md">
+                <div className="flex flex-col items-center justify-center rounded-2xl bg-amber-400 px-3 py-1.5 text-black font-mono font-black text-xl leading-none shrink-0 shadow-md">
                   <span className="text-[9px] uppercase tracking-wider">CH</span>
                   <span>{String(currentChannel.chNumber || 1).padStart(2, '0')}</span>
                 </div>
 
-                <div className="relative h-14 w-20 rounded-xl bg-slate-900 border border-surface-border overflow-hidden shrink-0 flex items-center justify-center p-1">
+                <div className="relative h-12 w-18 sm:h-14 sm:w-20 rounded-xl bg-black/60 border border-white/10 overflow-hidden shrink-0 flex items-center justify-center p-1">
                   <Image
                     src={currentChannel.logo || '/logos/placeholder.svg'}
                     alt={currentChannel.name}
@@ -212,14 +236,14 @@ export default function WatchPageClient({
                     <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
                       {currentChannel.name}
                     </h1>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-red-600 px-2.5 py-0.5 text-[11px] font-bold text-white shadow-sm shadow-red-600/30">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-red-600 px-2.5 py-0.5 text-[10px] font-black text-white shadow-sm shadow-red-600/30">
                       <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
                       LIVE
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 mt-1 text-xs text-slate-400">
-                    <span className="text-amber-400 font-bold">{currentChannel.language}</span>
+                  <div className="flex items-center gap-2 mt-1 text-xs text-slate-300">
+                    <span className="text-amber-300 font-bold">{currentChannel.language}</span>
                     <span>•</span>
                     <span>{currentChannel.category}</span>
                     <span>•</span>
@@ -231,12 +255,12 @@ export default function WatchPageClient({
               {/* Share action */}
               <button
                 onClick={handleCopy}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-surface-muted hover:bg-surface-border text-xs font-bold text-slate-200 border border-surface-border transition-colors self-start sm:self-auto min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] text-xs font-bold text-slate-200 border border-white/[0.08] transition-colors self-start sm:self-auto min-h-[44px]"
               >
                 {copied ? (
                   <>
                     <Check className="h-4 w-4 text-emerald-400" />
-                    <span className="text-emerald-400">Copied!</span>
+                    <span className="text-emerald-400">Link Copied!</span>
                   </>
                 ) : (
                   <>
@@ -250,12 +274,12 @@ export default function WatchPageClient({
         </div>
 
         {/* Side Column: Quick Channel List */}
-        <div className="rounded-3xl bg-surface border border-surface-border p-4 flex flex-col max-h-[750px]">
+        <div className="rounded-3xl bg-slate-900/60 border border-white/[0.08] p-4 flex flex-col max-h-[750px] backdrop-blur-xl shadow-xl">
           <div className="mb-3 space-y-2">
             <div className="flex items-center justify-between">
               <h2 className="text-xs font-black uppercase tracking-wider text-slate-200 flex items-center gap-1.5">
-                <Tv className="h-4 w-4 text-yellow-400" />
-                Cable Channel Lineup
+                <Tv className="h-4 w-4 text-amber-400" />
+                Lineup Quick Switcher
               </h2>
               <span className="text-[11px] font-mono text-slate-400">
                 {filteredChannels.length} Channels
@@ -266,10 +290,10 @@ export default function WatchPageClient({
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
               <input
                 type="text"
-                placeholder="Filter channels or number..."
+                placeholder="Search channel or number..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-full rounded-xl bg-surface-muted border border-surface-border pl-8 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-yellow-400"
+                className="w-full rounded-xl bg-white/[0.04] border border-white/[0.08] pl-8 pr-3 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-400 focus:bg-white/[0.06]"
               />
             </div>
           </div>
@@ -278,55 +302,57 @@ export default function WatchPageClient({
             {filteredChannels.map((c) => {
               const isCurrent = c.id === currentChannel.id;
               const isLive = Boolean(c.hlsUrl && c.hlsUrl.trim().length > 0);
-              const chNum = String(c.chNumber || 1).padStart(2, '0');
 
               return (
-                <button
+                <div
                   key={c.id}
                   onClick={() => tuneChannel(c)}
-                  className={`w-full flex items-center justify-between p-2.5 rounded-2xl text-left transition-all min-h-[52px] ${
+                  className={`group flex items-center justify-between p-2.5 rounded-2xl border transition-all cursor-pointer ${
                     isCurrent
-                      ? 'bg-yellow-400/15 border border-yellow-400/60 text-white shadow-sm'
-                      : isLive
-                      ? 'bg-surface-muted/60 hover:bg-surface-muted border border-transparent hover:border-yellow-400/30 text-slate-200'
-                      : 'bg-surface-muted/30 opacity-50 cursor-pointer border border-transparent text-slate-400'
+                      ? 'bg-amber-400/15 border-amber-400 shadow-md'
+                      : 'bg-white/[0.02] border-white/[0.05] hover:bg-white/[0.06] hover:border-white/[0.12]'
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <span
-                      className={`px-1.5 py-0.5 rounded-md font-mono text-xs font-black shrink-0 ${
+                      className={`font-mono text-xs font-black px-1.5 py-0.5 rounded-md ${
                         isCurrent
-                          ? 'bg-yellow-400 text-black'
-                          : 'bg-surface text-slate-300 border border-surface-border'
+                          ? 'bg-amber-400 text-black'
+                          : 'bg-black/40 text-amber-400 border border-white/5'
                       }`}
                     >
-                      {chNum}
+                      CH {String(c.chNumber || 1).padStart(2, '0')}
                     </span>
                     <div className="min-w-0">
-                      <p className="text-xs font-bold truncate leading-tight">
+                      <p className="text-xs font-bold text-white truncate group-hover:text-amber-400 transition-colors">
                         {c.name}
                       </p>
-                      <p className="text-[10px] text-slate-400 truncate">
-                        {c.language} • {isLive ? 'Live' : 'Coming Soon'}
-                      </p>
+                      <span className="text-[10px] text-slate-400">
+                        {c.language} • {c.category}
+                      </span>
                     </div>
                   </div>
 
-                  {isCurrent ? (
-                    <span className="text-[10px] font-black text-yellow-400 px-2 py-0.5 rounded-full bg-yellow-400/20">
-                      ON AIR
-                    </span>
-                  ) : (
-                    <ChevronRight className="h-4 w-4 text-slate-500 shrink-0" />
-                  )}
-                </button>
+                  <div className="shrink-0 flex items-center gap-1">
+                    {isCurrent ? (
+                      <span className="flex items-center gap-1 text-[10px] font-bold text-amber-400">
+                        ON AIR
+                      </span>
+                    ) : isLive ? (
+                      <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                    ) : (
+                      <span className="text-[9px] text-slate-400">Soon</span>
+                    )}
+                    <ChevronRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-white transition-colors" />
+                  </div>
+                </div>
               );
             })}
           </div>
         </div>
       </div>
 
-      {/* Persistent Remote Control Bar */}
+      {/* Persistent On-Screen Cable Remote Bar */}
       <TvRemoteBar
         currentChannel={currentChannel}
         onChannelUp={handleChannelUp}
@@ -343,7 +369,7 @@ export default function WatchPageClient({
         onToggleMute={handleToggleMute}
       />
 
-      {/* Numeric Numpad Modal */}
+      {/* Direct Numeric Keypad Jump Modal */}
       <TvNumpadModal
         isOpen={isNumpadOpen}
         onClose={() => setIsNumpadOpen(false)}
@@ -351,7 +377,7 @@ export default function WatchPageClient({
         onSelectChannel={tuneChannel}
       />
 
-      {/* TV Guide Overlay */}
+      {/* TV Guide (EPG Grid) Overlay */}
       <TvGuideOverlay
         isOpen={isGuideOpen}
         onClose={() => setIsGuideOpen(false)}
