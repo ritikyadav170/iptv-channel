@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#0f172a"/>
+  <rect width="398" height="238" x="1" y="1" rx="15" stroke="#334155" stroke-width="1.5"/>
+  <rect x="40" y="45" width="320" height="150" rx="12" fill="#b91c1c"/>
+  <text x="200" y="125" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="52" fill="#ffffff" letter-spacing="-1">NDTV</text>
+  <rect x="110" y="142" width="180" height="32" rx="6" fill="#ffffff"/>
+  <text x="200" y="165" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="800" font-size="20" fill="#b91c1c" letter-spacing="3">INDIA</text>
+</svg>
+

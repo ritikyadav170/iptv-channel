@@ -1,0 +1,302 @@
+[
+  {
+    "id": "ndtv-india",
+    "name": "NDTV India",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "NDTVIndia.in",
+    "logo": "/logos/ndtv-india.svg",
+    "hlsUrl": "https://ndtvindiaelemarchana.akamaized.net/hls/live/2003679/ndtvindia/master.m3u8",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+  },
+  {
+    "id": "abp-news",
+    "name": "ABP News",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "ABP News",
+    "logo": "/logos/abp-news.svg",
+    "hlsUrl": "https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/abpnews-livetv/master.m3u8",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+  },
+  {
+    "id": "abp-ananda",
+    "name": "ABP Ananda",
+    "category": "News",
+    "language": "Bengali",
+    "epgId": "ABP Ananda",
+    "logo": "/logos/abp-ananda.svg",
+    "hlsUrl": "https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/ananda-livetv/master.m3u8",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+  },
+  {
+    "id": "dd-national",
+    "name": "DD National",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "DDNational.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "dd-news",
+    "name": "DD News",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "DDNews.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "dd-india",
+    "name": "DD India",
+    "category": "News",
+    "language": "English",
+    "epgId": "DDIndia.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "dd-bharati",
+    "name": "DD Bharati",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "DDBharati.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "dd-kisan",
+    "name": "DD Kisan",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "DDKisan.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "dd-urdu",
+    "name": "DD Urdu",
+    "category": "News",
+    "language": "Urdu",
+    "epgId": "DDUrdu.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "india-today",
+    "name": "India Today",
+    "category": "News",
+    "language": "English",
+    "epgId": "IndiaToday.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "aaj-tak",
+    "name": "Aaj Tak",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "AajTak.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "india-tv",
+    "name": "India TV",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "IndiaTV.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "tv9-bharatvarsh",
+    "name": "TV9 Bharatvarsh",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "TV9Bharatvarsh.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "tv9-kannada",
+    "name": "TV9 Kannada",
+    "category": "News",
+    "language": "Kannada",
+    "epgId": "TV9Kannada.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "tv9-telugu",
+    "name": "TV9 Telugu",
+    "category": "News",
+    "language": "Telugu",
+    "epgId": "TV9Telugu.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "tv9-marathi",
+    "name": "TV9 Marathi",
+    "category": "News",
+    "language": "Marathi",
+    "epgId": "TV9Marathi.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "republic-bharat",
+    "name": "Republic Bharat",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "RepublicBharat.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "ndtv-profit",
+    "name": "NDTV Profit",
+    "category": "News",
+    "language": "English",
+    "epgId": "NDTVProfit.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "asianet-news",
+    "name": "Asianet News",
+    "category": "News",
+    "language": "Malayalam",
+    "epgId": "AsianetNews.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "asianet-suvarna-news",
+    "name": "Asianet Suvarna News",
+    "category": "News",
+    "language": "Kannada",
+    "epgId": "Kannada.AsianetNews.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "asianet-news-telugu",
+    "name": "Asianet News Telugu",
+    "category": "News",
+    "language": "Telugu",
+    "epgId": "Telugu.AsianetNews.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "news18-india",
+    "name": "News18 India",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "News18.com",
+    "logo": "/logos/news18-india.svg",
+    "hlsUrl": "https://nw18live.cdn.jio.com/bpk-tv/News18_India_NW18_MOB/output01/index.m3u8",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+  },
+  {
+    "id": "cnn-news18",
+    "name": "CNN-News18",
+    "category": "News",
+    "language": "English",
+    "epgId": "News18.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "news18-up-uttarakhand",
+    "name": "News18 UP Uttarakhand",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "News18.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "news18-kannada",
+    "name": "News18 Kannada",
+    "category": "News",
+    "language": "Kannada",
+    "epgId": "News18.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "news18-telugu",
+    "name": "News18 Telugu",
+    "category": "News",
+    "language": "Telugu",
+    "epgId": "News18.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "news18-marathi",
+    "name": "News18 Marathi",
+    "category": "News",
+    "language": "Marathi",
+    "epgId": "News18.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "wion",
+    "name": "WION",
+    "category": "News",
+    "language": "English",
+    "epgId": "wionews.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "mirror-now",
+    "name": "Mirror Now",
+    "category": "News",
+    "language": "English",
+    "epgId": "timesnownews.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "zee-news",
+    "name": "ZEE News",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "zeenews.india.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "news24",
+    "name": "News24",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "news24online.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  },
+  {
+    "id": "good-news-today",
+    "name": "Good News Today",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "gnttv.com",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": ""
+  }
+]

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#0f172a"/>
+  <rect width="398" height="238" x="1" y="1" rx="15" stroke="#334155" stroke-width="1.5"/>
+  <rect x="40" y="45" width="320" height="150" rx="12" fill="#dc2626"/>
+  <text x="140" y="125" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="34" fill="#ffffff">NEWS</text>
+  <rect x="220" y="70" width="110" height="70" rx="8" fill="#ffffff"/>
+  <text x="275" y="124" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="44" fill="#dc2626">18</text>
+  <rect x="70" y="148" width="260" height="32" rx="4" fill="#1e293b"/>
+  <text x="200" y="170" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="800" font-size="18" fill="#ffffff" letter-spacing="3">INDIA</text>
+</svg>
+

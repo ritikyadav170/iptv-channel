@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#0f172a"/>
+  <rect width="398" height="238" x="1" y="1" rx="15" stroke="#334155" stroke-width="1.5"/>
+  <rect x="40" y="45" width="320" height="150" rx="12" fill="#7f1d1d"/>
+  <polygon points="200,60 230,100 200,140 170,100" fill="#facc15"/>
+  <text x="200" y="112" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="28" fill="#7f1d1d">ABP</text>
+  <rect x="90" y="145" width="220" height="34" rx="6" fill="#38bdf8"/>
+  <text x="200" y="169" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="#0f172a" letter-spacing="2">ANANDA</text>
+</svg>
+

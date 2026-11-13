@@ -1,0 +1,58 @@
+[
+  {
+    "id": "news",
+    "name": "News",
+    "description": "24/7 Live Breaking News, National & Regional Coverage",
+    "active": true,
+    "icon": "Radio"
+  },
+  {
+    "id": "sports",
+    "name": "Sports",
+    "description": "Live cricket, football, racing & sports highlights",
+    "active": false,
+    "badge": "Coming Soon",
+    "icon": "Trophy"
+  },
+  {
+    "id": "movies",
+    "name": "Movies",
+    "description": "Blockbuster cinema, classic movies & regional hits",
+    "active": false,
+    "badge": "Coming Soon",
+    "icon": "Film"
+  },
+  {
+    "id": "entertainment",
+    "name": "Entertainment",
+    "description": "Serials, comedy specials, reality shows & drama",
+    "active": false,
+    "badge": "Coming Soon",
+    "icon": "Tv"
+  },
+  {
+    "id": "kids",
+    "name": "Kids",
+    "description": "Cartoons, animated films & learning programs",
+    "active": false,
+    "badge": "Coming Soon",
+    "icon": "Smile"
+  },
+  {
+    "id": "music",
+    "name": "Music",
+    "description": "Top music hits, non-stop chartbusters & live concerts",
+    "active": false,
+    "badge": "Coming Soon",
+    "icon": "Music"
+  },
+  {
+    "id": "documentary",
+    "name": "Documentary",
+    "description": "Nature, wildlife, history & investigative stories",
+    "active": false,
+    "badge": "Coming Soon",
+    "icon": "Compass"
+  }
+]
+
