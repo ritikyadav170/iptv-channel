@@ -26,16 +26,16 @@
     "id": "entertainment",
     "name": "Entertainment",
     "description": "Serials, comedy specials, reality shows & drama",
-    "active": false,
-    "badge": "Coming Soon",
+    "active": true,
+    "badge": "Active",
     "icon": "Tv"
   },
   {
     "id": "kids",
     "name": "Kids",
     "description": "Cartoons, animated films & learning programs",
-    "active": false,
-    "badge": "Coming Soon",
+    "active": true,
+    "badge": "Active",
     "icon": "Smile"
   },
   {

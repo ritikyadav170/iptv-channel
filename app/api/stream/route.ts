@@ -203,8 +203,9 @@ export async function GET(request: NextRequest) {
 
     if (isM3U8) {
       const rawText = await upstreamRes.text();
-      // Double check if text starts with #EXTM3U
-      if (rawText.trim().startsWith('#EXTM3U') || targetUrl.includes('.m3u8')) {
+      const trimmed = rawText.trim();
+      // Valid HLS playlists MUST start with #EXTM3U
+      if (trimmed.startsWith('#EXTM3U')) {
         const rewrittenManifest = rewriteM3U8(rawText, targetUrl, channel.id);
 
         return new NextResponse(rewrittenManifest, {
@@ -218,6 +219,18 @@ export async function GET(request: NextRequest) {
             Expires: '0',
           },
         });
+      } else {
+        // Upstream returned non-m3u8 payload (e.g. error message, token expired, HTML)
+        console.warn(
+          `[Proxy Upstream Non-M3U8] ${channel.name} (${targetUrl}) => ${trimmed.slice(0, 120)}`
+        );
+        return NextResponse.json(
+          {
+            error: `Upstream returned invalid HLS playlist: ${trimmed.slice(0, 100)}`,
+            channel: channel.name,
+          },
+          { status: 502, headers: CORS_HEADERS }
+        );
       }
     }
 
