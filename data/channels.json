@@ -55,7 +55,7 @@
     "language": "Hindi",
     "epgId": "DDNews.in",
     "logo": "/logos/placeholder.svg",
-    "hlsUrl": "",
+    "hlsUrl": "https://www.youtube.com/@DDNews/live",
     "chNumber": 5
   },
   {
@@ -65,7 +65,7 @@
     "language": "English",
     "epgId": "DDIndia.in",
     "logo": "/logos/placeholder.svg",
-    "hlsUrl": "",
+    "hlsUrl": "https://www.youtube.com/@DDIndia/live",
     "chNumber": 6
   },
   {
@@ -141,7 +141,7 @@
     "language": "Hindi",
     "epgId": "TV9Bharatvarsh.in",
     "logo": "/logos/placeholder.svg",
-    "hlsUrl": "",
+    "hlsUrl": "https://www.youtube.com/@TV9Bharatvarsh/live",
     "chNumber": 13
   },
   {
@@ -151,7 +151,7 @@
     "language": "Kannada",
     "epgId": "TV9Kannada.in",
     "logo": "/logos/placeholder.svg",
-    "hlsUrl": "",
+    "hlsUrl": "https://www.youtube.com/@tv9kannada/live",
     "chNumber": 14
   },
   {
@@ -181,7 +181,7 @@
     "language": "Hindi",
     "epgId": "RepublicBharat.in",
     "logo": "/logos/placeholder.svg",
-    "hlsUrl": "",
+    "hlsUrl": "https://www.youtube.com/@RepublicBharat/live",
     "chNumber": 17
   },
   {
@@ -204,7 +204,7 @@
     "language": "Malayalam",
     "epgId": "AsianetNews.com",
     "logo": "/logos/placeholder.svg",
-    "hlsUrl": "",
+    "hlsUrl": "https://www.youtube.com/@asianetnews/live",
     "chNumber": 19
   },
   {
@@ -309,7 +309,7 @@
     "language": "English",
     "epgId": "wionews.com",
     "logo": "/logos/placeholder.svg",
-    "hlsUrl": "",
+    "hlsUrl": "https://www.youtube.com/@WION/live",
     "chNumber": 28
   },
   {
@@ -442,5 +442,55 @@
     "logo": "/logos/placeholder.svg",
     "hlsUrl": "https://5ad386ff92705.streamlock.net/live_transcoder/ngrp:zindagitv.stream_all/chunklist.m3u",
     "chNumber": 39
+  },
+  {
+    "id": "mazhavil-manorama",
+    "name": "Mazhavil Manorama",
+    "category": "Entertainment",
+    "language": "Malayalam",
+    "epgId": "MazhavilManorama.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": "https://yuppmedtaorire.akamaized.net/v1/master/a0d007312bfd99c47f76b77ae26b1ccdaae76cb1/mazhavilmanorama_nim_https/050522/mazhavilmanorama/playlist.m3u8",
+    "chNumber": 40
+  },
+  {
+    "id": "ayush-tv",
+    "name": "Ayush TV",
+    "category": "News",
+    "language": "Kannada",
+    "epgId": "AyushTV.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": "https://95eryw39dwn4-hls-live.wmncdn.net/Ayushu/271ddf829afeece44d8732757fba1a66.sdp/index.m3u8",
+    "chNumber": 41
+  },
+  {
+    "id": "sadhna-news",
+    "name": "Sadhna Plus News",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "SadhnaNews.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": "https://6n3yow8pl9ok-hls-live.5centscdn.com/sadhananewstv/live.stream/playlist.m3u8",
+    "chNumber": 42
+  },
+  {
+    "id": "inh-news",
+    "name": "INH 24x7",
+    "category": "News",
+    "language": "Hindi",
+    "epgId": "INH24.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": "https://7epd6o8edk9b-hls-live.wmncdn.net/inh24/live.stream/playlist.m3u8",
+    "chNumber": 43
+  },
+  {
+    "id": "total-bhakti",
+    "name": "Total Bhakti",
+    "category": "Entertainment",
+    "language": "Hindi",
+    "epgId": "TotalBhakti.in",
+    "logo": "/logos/placeholder.svg",
+    "hlsUrl": "https://d34z4embz0hjf6.cloudfront.net/out/v1/d55b3323a9f142638f897378f0b526fe/index.m3u8",
+    "chNumber": 44
   }
 ]
